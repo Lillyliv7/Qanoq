@@ -7,7 +7,7 @@ import 'dart:convert';
 
 import 'analyzer.dart';
 import 'dictionary.dart';
-import 'databases.dart';
+import 'variables.dart';
 import 'settings.dart';
 
 void main() {
@@ -20,28 +20,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      // 1. Give it the async function to wait for
       future: loadDatabases(),
       builder: (context, snapshot) {
-        // 2. While we are waiting, show a loading spinner
         if (snapshot.connectionState == ConnectionState.waiting) {
           return MaterialApp(
             home: Scaffold(body: Center(child: CircularProgressIndicator())),
           );
         }
 
-        // 3. Once it's done loading, show the real app!
-
+        return StreamBuilder<bool>(
+        initialData: false,
+        stream: darkModeStream.stream,
+        builder: (context, snapshot) {
+        darkModeBoolValue = snapshot.data!;
         return MaterialApp(
           title: 'Kalaallisut Dictionary',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.green,
-              brightness: Brightness.light,
+              seedColor: uiColor,
+              brightness: snapshot.data! ? Brightness.dark : Brightness.light,
             ),
           ),
           home: const app(),
-        );
+        );});
       },
     );
   }

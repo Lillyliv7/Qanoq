@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'databases.dart';
+import 'variables.dart';
 
 const double dictionaryElementHeight = 50;
 

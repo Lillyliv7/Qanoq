@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:async';
+import 'dart:ffi';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +15,9 @@ var analyzerMofoObj;
 var kalEngObj;
 var uiStrings;
 var preferences;
+var uiColor = Colors.green;
+StreamController<bool> darkModeStream = StreamController();
+bool darkModeBoolValue = false;
 
 
 Future<bool> loadDatabases() async {

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'databases.dart';
+import 'variables.dart';
 import 'language.dart';
 
 const List<String> languagesList = <String>["English", "Español"];
@@ -33,6 +33,24 @@ class _settingsPageState extends State<settingsPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
+                uiStrings['settings.dark-mode'],
+                style: TextStyle(fontSize: 20),
+              ),
+
+              Switch(
+                value: darkModeBoolValue,
+                onChanged: (value) {
+                  setState(() {
+                    darkModeStream.add(value);
+                  });
+                },
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
                 uiStrings['settings.language'],
                 style: TextStyle(fontSize: 20),
               ),
@@ -41,8 +59,8 @@ class _settingsPageState extends State<settingsPage> {
                 value: languageDropdown,
                 icon: const Icon(Icons.arrow_downward),
                 elevation: 16,
-                style: const TextStyle(color: Colors.deepPurple),
-                underline: Container(height: 2, color: Colors.deepPurpleAccent),
+                style: TextStyle(color: uiColor),
+                underline: Container(height: 2, color: uiColor),
                 onChanged: (String? value) {
                   // This is called when the user selects an item.
                   setState(() {

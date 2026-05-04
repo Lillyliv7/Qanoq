@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import 'databases.dart';
+import 'variables.dart';
 
 Future<void> changeLanguage(String? language) async {
   switch (language) {

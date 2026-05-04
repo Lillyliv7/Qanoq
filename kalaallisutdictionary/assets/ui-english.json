@@ -1,6 +1,8 @@
 {
     "ui.close": "Close",
     "ui.ok": "OK",
+    "ui.on": "On",
+    "ui.off": "Off",
     "analyzer.enter-word": "Enter a full word",
     "analyzer.title": "Word Lookup",
     "grammar.noun": "Noun",
@@ -25,5 +27,6 @@
     "tagging.tooltip": "FIXME",
     "settings.language": "Language",
     "settings.title": "Settings",
+    "settings.dark-mode": "Dark mode",
     "settings.credits": "Developed by Lillith (lillith888 on Discord)\nFree Software under the GNU GPL Version 3.0\nhttps://www.gnu.org/licenses/gpl-3.0.en.html\nhttps://github.com/Lillyliv7/Kalaallisut-Dictionary"
 }

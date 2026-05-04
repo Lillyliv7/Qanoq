@@ -41,6 +41,11 @@
             "m": "N{-it}V"
         },
         {
+            "a": "SI",
+            "t": "Noun -> Verb",
+            "m": "N{si}V"
+        },
+        {
             "a": "TAR",
             "t": "Verb -> Verb",
             "m": "V{ðaq}V"

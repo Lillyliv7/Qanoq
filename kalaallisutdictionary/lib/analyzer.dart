@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:kalaallisutdictionary/blockWidget.dart';
-import 'databases.dart';
+import 'variables.dart';
 
 class ParsedWord {
   final Root root;

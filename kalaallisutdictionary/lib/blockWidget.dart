@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'analyzer.dart';
 import 'dictionary.dart';
-import 'databases.dart';
+import 'variables.dart';
 
 
 class ParsedWordWidget extends StatefulWidget {
