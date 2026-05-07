@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'variables.dart';
 
@@ -153,19 +150,46 @@ class _dictionaryPageState extends State<dictionaryPage> {
       }
 
         // search dictionary
-        if ((searchEnglish &&
+        if (searchFromStart) {
+          // if you only want to search from the start of a phrase
+          if ((searchEnglish &&
                 currentEngElement.startsWith(
-                  _textValue.toLowerCase(),
+                  searchTerm,
                 )) ||
             (searchGreenlandic &&
                 currentKalElement.startsWith(
-                  _textValue.toLowerCase(),
+                  searchTerm,
                 ))) {
           indexes.add({
             "eng": kalEngObj['entries'][i]['eng'],
             "kal": kalEngObj['entries'][i]['kal'],
             "type": kalEngObj['entries'][i]['type'],
           });
+        }
+        } else {
+          // if you want to search from the start of every word
+          List<String> currentEngElementSplit = currentEngElement.split(' ');
+          List<String> currentKalElementSplit = currentKalElement.split(' ');
+          for (var j in currentEngElementSplit) {
+            if (j.startsWith(searchTerm)) {
+              indexes.add({
+                "eng": kalEngObj['entries'][i]['eng'],
+                "kal": kalEngObj['entries'][i]['kal'],
+                "type": kalEngObj['entries'][i]['type'],
+              });
+              break;
+            }
+          }
+          for (var j in currentKalElementSplit) {
+            if (j.startsWith(searchTerm)) {
+              indexes.add({
+                "eng": kalEngObj['entries'][i]['eng'],
+                "kal": kalEngObj['entries'][i]['kal'],
+                "type": kalEngObj['entries'][i]['type'],
+              });
+              break;
+            }
+          }
         }
       }
       Navigator.of(context).restorablePush(_resultsBuilder, arguments: indexes);
