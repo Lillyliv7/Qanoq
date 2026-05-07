@@ -21,6 +21,8 @@
     "dictionary.settings": "Settings",
     "dictionary.english": "English",
     "dictionary.greenlandic": "Greenlandic",
+    "dictionary.case-sensitive": "Case sensitive",
+    "dictionary.search-start": "Search from start only",
     "tagging.title": "Tagging",
     "tagging.file": "File",
     "tagging.save": "Save",

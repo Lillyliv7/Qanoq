@@ -11,10 +11,6 @@ String kalEngTypeToEng(String? kalEngType) {
   if (kalEngType == null) {
     return 'unknown';
   }
-  if (kalEngType.toLowerCase() == "proprium/egennavn") {
-    // proper noun
-    return 'noun';
-  }
   if (kalEngType.toLowerCase() == "taggit") {
     // noun
     return 'noun';
@@ -30,6 +26,10 @@ String kalEngTypeToEng(String? kalEngType) {
   if (kalEngType.toLowerCase() == "oqaluut susaasalik") {
     // HTR
     return 'verb';
+  }
+  if (kalEngType.toLowerCase() == "proprium/egennavn") {
+    // proper noun
+    return 'noun';
   }
   return 'unknown';
 }
@@ -92,6 +92,85 @@ class _dictionaryPageState extends State<dictionaryPage> {
 
   bool searchGreenlandic = true;
   bool searchEnglish = true;
+  bool caseSensitive = false;
+  bool searchFromStart = false;
+
+  void _searchDictionary() {
+    if (_textValue == '') {
+      return;
+    }
+
+    String searchTerm;
+    if (caseSensitive) {
+      searchTerm = _textValue;
+    } else {
+      searchTerm = _textValue.toLowerCase();
+    }
+
+    // search for exact match
+    var index = 0;
+    for (var i = 0; i < kalEngObj['entries'].length; i++) {
+      // sort out case sensitivity
+      String currentKalElement;
+      String currentEngElement;
+      if (caseSensitive) {
+        currentEngElement = kalEngObj['entries'][i]['eng'];
+        currentKalElement = kalEngObj['entries'][i]['kal'];
+      } else {
+        currentEngElement = kalEngObj['entries'][i]['eng'].toLowerCase();
+        currentKalElement = kalEngObj['entries'][i]['kal'].toLowerCase();
+      }
+
+      // search
+      if (currentEngElement == searchTerm ||
+          currentKalElement == searchTerm) {
+        index = i;
+      }
+    }
+
+    if (index != 0) {
+      // found an exact match, go to it
+      _scrollController.animateTo(
+        index * dictionaryElementHeight,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeIn,
+      );
+      return;
+    } else {
+      // no exact match found, search for the closest ones
+      List<Object> indexes = [];
+      for (var i = 0; i < kalEngObj['entries'].length; i++) {
+
+      // sort out case sensitivity
+      String currentKalElement;
+      String currentEngElement;
+      if (caseSensitive) {
+        currentEngElement = kalEngObj['entries'][i]['eng'];
+        currentKalElement = kalEngObj['entries'][i]['kal'];
+      } else {
+        currentEngElement = kalEngObj['entries'][i]['eng'].toLowerCase();
+        currentKalElement = kalEngObj['entries'][i]['kal'].toLowerCase();
+      }
+
+        // search dictionary
+        if ((searchEnglish &&
+                currentEngElement.startsWith(
+                  _textValue.toLowerCase(),
+                )) ||
+            (searchGreenlandic &&
+                currentKalElement.startsWith(
+                  _textValue.toLowerCase(),
+                ))) {
+          indexes.add({
+            "eng": kalEngObj['entries'][i]['eng'],
+            "kal": kalEngObj['entries'][i]['kal'],
+            "type": kalEngObj['entries'][i]['type'],
+          });
+        }
+      }
+      Navigator.of(context).restorablePush(_resultsBuilder, arguments: indexes);
+    }
+  }
 
   void _optionsBuilder() {
     showDialog(
@@ -104,10 +183,11 @@ class _dictionaryPageState extends State<dictionaryPage> {
               content: ConstrainedBox(
                 constraints: const BoxConstraints(
                   maxWidth: 600,
-                  maxHeight: 800,
+                  maxHeight: 400,
+                  minWidth: 300,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,6 +214,36 @@ class _dictionaryPageState extends State<dictionaryPage> {
                           onChanged: (value) {
                             setState(() {
                               searchGreenlandic = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(uiStrings['dictionary.case-sensitive']),
+
+                        Switch(
+                          value: caseSensitive,
+                          onChanged: (value) {
+                            setState(() {
+                              caseSensitive = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(uiStrings['dictionary.search-start']),
+
+                        Switch(
+                          value: searchFromStart,
+                          onChanged: (value) {
+                            setState(() {
+                              searchFromStart = value;
                             });
                           },
                         ),
@@ -266,49 +376,7 @@ class _dictionaryPageState extends State<dictionaryPage> {
               ),
               const SizedBox(width: 15),
               ElevatedButton(
-                onPressed: () {
-                  if (_textValue == '') {
-                    return;
-                  }
-                  var index = 0;
-                  for (var i = 0; i < kalEngObj['entries'].length; i++) {
-                    if (kalEngObj['entries'][i]['eng'] == _textValue ||
-                        kalEngObj['entries'][i]['kal'] == _textValue) {
-                      index = i;
-                    }
-                  }
-                  if (index != 0) {
-                    // found an exact match
-                    _scrollController.animateTo(
-                      index * dictionaryElementHeight,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeIn,
-                    );
-                    return;
-                  } else {
-                    // no exact match found, search for the closest ones
-                    List<Object> indexes = [];
-                    for (var i = 0; i < kalEngObj['entries'].length; i++) {
-                      if ((searchEnglish &&
-                              kalEngObj['entries'][i]['eng']
-                                  .toLowerCase()
-                                  .startsWith(_textValue.toLowerCase())) ||
-                          (searchGreenlandic &&
-                              kalEngObj['entries'][i]['kal']
-                                  .toLowerCase()
-                                  .startsWith(_textValue.toLowerCase()))) {
-                        indexes.add({
-                          "eng": kalEngObj['entries'][i]['eng'],
-                          "kal": kalEngObj['entries'][i]['kal'],
-                          "type": kalEngObj['entries'][i]['type'],
-                        });
-                      }
-                    }
-                    Navigator.of(
-                      context,
-                    ).restorablePush(_resultsBuilder, arguments: indexes);
-                  }
-                },
+                onPressed: _searchDictionary,
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(50, 50),
                   padding: EdgeInsets.zero,

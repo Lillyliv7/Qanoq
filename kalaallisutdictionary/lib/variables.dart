@@ -1,15 +1,11 @@
 import 'dart:convert';
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'language.dart';
-
-
-// import 'settings.dart';
 
 var analyzerMofoObj;
 var kalEngObj;

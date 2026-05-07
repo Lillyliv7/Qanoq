@@ -21,6 +21,8 @@
     "dictionary.settings": "Ajustes",
     "dictionary.english": "Inglés",
     "dictionary.greenlandic": "Groenlandés",
+    "dictionary.case-sensitive": "Sensible a mayúsculas",
+    "dictionary.search-start": "Buscar solo desde el principio",
     "tagging.title": "Etiquetar",
     "tagging.file": "Archivo",
     "tagging.save": "Guardar",
