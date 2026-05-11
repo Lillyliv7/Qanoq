@@ -83,7 +83,7 @@
     ],
     "tables": {
         "noun": {
-            "title": "tables.noun",
+            "title": "tables.noun.title",
             "geometry": [2, 8],
             "table": [
                 {
