@@ -73,12 +73,12 @@
         {
             "tag": "endings.noun.equ.sg",
             "analyzer": "N + Aeq + Sg",
-            "mofo": "N{kkut}"
+            "mofo": "N{tut}"
         },
         {
             "tag": "endings.noun.equ.pl",
             "analyzer": "N + Aeq + Pl",
-            "mofo": "N{tigut}"
+            "mofo": "N{tut}"
         }
     ],
     "tables": {

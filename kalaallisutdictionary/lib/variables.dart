@@ -11,6 +11,7 @@ var analyzerMofoObj;
 var kalEngObj;
 var uiStrings;
 var preferences;
+var endings;
 var uiColor = Colors.green;
 StreamController<bool> darkModeStream = StreamController();
 bool darkModeBoolValue = false;
@@ -25,6 +26,9 @@ Future<bool> loadDatabases() async {
 
   final String uiStringsStr = await rootBundle.loadString('assets/ui-english.json');
   uiStrings = jsonDecode(uiStringsStr);
+
+  final String endingsStr = await rootBundle.loadString('assets/endings.json');
+  endings = jsonDecode(endingsStr);
 
   preferences = await SharedPreferences.getInstance();
 

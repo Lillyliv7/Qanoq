@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:kalaallisutdictionary/assistedTagging.dart';
+import 'package:kalaallisutdictionary/tagging.dart';
 import 'package:kalaallisutdictionary/conjugationTables.dart';
 import 'dart:convert';
 
@@ -59,7 +59,7 @@ class _appState extends State<app> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 4,
       child: Scaffold(
         body: Center(
           child: SafeArea(
@@ -70,7 +70,7 @@ class _appState extends State<app> {
                   tabs: [
                     Tab(icon: Icon(Icons.pageview_outlined)), // word lookup
                     Tab(icon: Icon(Icons.library_books)), // dictionary view
-                    Tab(icon: Icon(Icons.reorder)), // tagging
+                    // Tab(icon: Icon(Icons.reorder)), // tagging
                     Tab(icon: Icon(Icons.table_chart)),
                     Tab(icon: Icon(Icons.settings)), // settings
                   ],
@@ -80,7 +80,7 @@ class _appState extends State<app> {
                     children: [
                       const analyzerPage(),
                       const dictionaryPage(),
-                      const taggingPage(),
+                      // const taggingPage(),
                       const tablePage(),
                       const settingsPage(),
                     ],

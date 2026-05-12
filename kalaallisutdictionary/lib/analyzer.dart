@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:kalaallisutdictionary/blockWidget.dart';
 import 'variables.dart';
+import 'tagging.dart';
 
 class ParsedWord {
   final Root root;
@@ -12,7 +13,12 @@ class ParsedWord {
   final Ending ending;
   final List<Clitic> clitics;
 
-  ParsedWord({required this.root, required this.affixes, required this.ending, required this.clitics});
+  ParsedWord({
+    required this.root,
+    required this.affixes,
+    required this.ending,
+    required this.clitics,
+  });
 
   @override
   String toString() {
@@ -186,20 +192,20 @@ ParsedWord parseAnalyzerOutput(String input) {
   else if (endingTags.isNotEmpty) {
     if (endingTags.first == 'N') {
       rootType = 'Noun';
-    }
-    else if (endingTags.first == 'V') {
+    } else if (endingTags.first == 'V') {
       rootType = 'Verb';
-    }
-    else {
+    } else {
       print(endingTags);
       rootType = 'Unknown';
     }
   }
   for (var i = 0; i < endingTags.length; i++) {
-    if(endingTags[i] == endingTags[i].toUpperCase()
-    && (endingTags[i] != 'N' && endingTags[i] != 'V')) {
+    if (endingTags[i] == endingTags[i].toUpperCase() &&
+        (endingTags[i] != 'N' && endingTags[i] != 'V')) {
       // Special case for mitaava
-      if (i < endingTags.length-1 && endingTags[i] == "MI" && endingTags[i+1] == "TAAVA") {
+      if (i < endingTags.length - 1 &&
+          endingTags[i] == "MI" &&
+          endingTags[i + 1] == "TAAVA") {
         clitics.add(Clitic("MITAAVA"));
         endingTags.removeAt(i);
         endingTags.removeAt(i);
@@ -215,7 +221,7 @@ ParsedWord parseAnalyzerOutput(String input) {
     root: Root(rootText, rootType, rootMarkers),
     affixes: affixes,
     ending: Ending(endingTags),
-    clitics: clitics
+    clitics: clitics,
   );
 }
 
@@ -264,7 +270,6 @@ class _analyzerPageState extends State<analyzerPage> {
   String _textValue = '';
   String _analyzerServer = 'imlillith888.xyz:8000';
 
-  // Changed from List<String> to List<ParsedWord>
   List<ParsedWord> _cleanedAnalyses = [];
 
   void _searchDictionary() {
@@ -316,76 +321,98 @@ class _analyzerPageState extends State<analyzerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
+      alignment: Alignment.center,
       children: [
-        Text(uiStrings['analyzer.title'], style: TextStyle(fontSize: 30)),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // TextField(
-              //   controller: _serverController,
-              //   decoration: const InputDecoration(
-              //     hintText: 'Analyzer Server (ex: localhost:8000)',
-              //     border: OutlineInputBorder(),
-              //   ),
-              //   onChanged: (text) {
-              //     setState(() {
-              //       _analyzerServer = text;
-              //     });
-              //   },
-              // ),
-              const SizedBox(height: 15),
-              Row(
+        Positioned(
+          right: 15,
+          top: 15,
+          child: ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return StatefulBuilder(
+                    builder: (context, setState) {
+                      return AlertDialog(
+                        title: Text(uiStrings['dictionary.settings']),
+                        content: taggingPage(),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              fixedSize: const Size(50, 50),
+              padding: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Icon(Icons.menu, size: 32),
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(uiStrings['analyzer.title'], style: TextStyle(fontSize: 30)),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 400),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _wordController,
-                      decoration: InputDecoration(
-                        hintText: uiStrings['analyzer.enter-word'],
-                        border: OutlineInputBorder(),
+                  const SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _wordController,
+                          decoration: InputDecoration(
+                            hintText: uiStrings['analyzer.enter-word'],
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (text) {
+                            setState(() {
+                              _textValue = text;
+                            });
+                          },
+                        ),
                       ),
-                      onChanged: (text) {
-                        setState(() {
-                          _textValue = text;
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 15),
-                  ElevatedButton(
-                    onPressed: _searchDictionary,
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(50, 50),
-                      padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                      const SizedBox(width: 15),
+                      ElevatedButton(
+                        onPressed: _searchDictionary,
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(50, 50),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Icon(Icons.pageview_outlined, size: 32),
                       ),
-                    ),
-                    child: const Icon(Icons.pageview_outlined, size: 32),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            // Render the custom widget for each analysis
-            children: _cleanedAnalyses
-                .map(
-                  (parsedWord) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: ParsedWordWidget(word: parsedWord),
-                  ),
-                )
-                .toList(),
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // Render the custom widget for each analysis
+                children: _cleanedAnalyses
+                    .map(
+                      (parsedWord) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: ParsedWordWidget(word: parsedWord),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ],
         ),
       ],
     );
