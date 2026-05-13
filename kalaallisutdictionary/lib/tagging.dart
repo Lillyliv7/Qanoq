@@ -82,7 +82,7 @@ class _taggingPageState extends State<taggingPage> {
       }
 
       final cleaned = analysesNoRepeats
-          .map((a) => parseAnalyzerOutput(a))
+          .map((a) => parseWord(a))
           .toList();
       setState(() {
         _cleanedAnalyses = cleaned;
