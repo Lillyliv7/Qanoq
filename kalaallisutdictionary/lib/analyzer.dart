@@ -243,7 +243,7 @@ class Morpheme {
   String endForm;
   String type;
   // join: n, iv, tv, nn, nv, vv, vn, enc, ev, end
-  // type: enc, aff, end. root
+  // type: enc, aff, end, root
   Morpheme({required this.join, required this.type, this.form = "", this.endForm = ""});
 }
 
@@ -289,7 +289,7 @@ ParsedWord parseWord(String str) {
     } else {
       // in something that is not an affix, ending marker, or a root
       if(morphemes[0].join == '?') { // has not found base join marker yet
-        morphemes[0].join = analyzerTypeConverter(part);
+        morphemes[0].join = analyzerTypeConverter(part).split('')[0];
       }
     }
   }

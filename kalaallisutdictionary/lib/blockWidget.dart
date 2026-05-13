@@ -4,7 +4,50 @@ import 'analyzer.dart';
 import 'dictionary.dart';
 import 'variables.dart';
 
+String getBlockText(Morpheme morph) {
+  return analyzerToMofo(morph.form, morph.join);
+}
 
+String getTooltipText(Morpheme morph) {
+  if(morph.type == 'root') {
+    print(morph.join);
+    print(dictionarySearchType(morph.join, morph.form).join('\n'));
+    return dictionarySearchType(morph.join, morph.form).join('\n');
+  }
+  return '?';
+}
+
+Color getBlockColor(Morpheme morph) {
+  if (morph.type == 'root') {
+    return Colors.blue.shade100;
+  }
+  if (morph.type == 'aff') {
+    return Colors.green.shade100;
+  }
+  if (morph.type == 'end') {
+    return Colors.orange.shade100;
+  }
+  if (morph.type == 'enc') {
+    return Colors.purple.shade100;
+  }
+  return Colors.black;
+}
+
+Color getBorderColor(Morpheme morph) {
+  if (morph.type == 'root') {
+    return Colors.blue.shade400;
+  }
+  if (morph.type == 'aff') {
+    return Colors.green.shade400;
+  }
+  if (morph.type == 'end') {
+    return Colors.orange.shade400;
+  }
+  if (morph.type == 'enc') {
+    return Colors.purple.shade400;
+  }
+  return Colors.black;
+}
 
 class ParsedWordWidget extends StatefulWidget {
   final ParsedWord word;
@@ -68,7 +111,7 @@ class _ParsedWordWidgetState extends State<ParsedWordWidget> {
           spacing: 6.0,
           runSpacing: 8.0,
           children: [
-            ...widget.word.morphemes.map((e) => _MorphBlock(text: e.type, tooltipText: 'hi', backgroundColor: Colors.purple.shade100, borderColor: Colors.purple.shade400))
+            ...widget.word.morphemes.map((e) => _MorphBlock(text: getBlockText(e), tooltipText: getTooltipText(e), backgroundColor: getBlockColor(e), borderColor: getBorderColor(e)))
           ]
         );
   }

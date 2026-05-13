@@ -10,23 +10,23 @@ String kalEngTypeToEng(String? kalEngType) {
   }
   if (kalEngType.toLowerCase() == "taggit") {
     // noun
-    return 'noun';
+    return 'n';
   }
   if (kalEngType.toLowerCase() == 'oqaluut susaatsoq') {
     // intransitive
-    return 'verb';
+    return 'v';
   }
   if (kalEngType.toLowerCase() == 'oqaluut susalik') {
     // transitive
-    return 'verb';
+    return 'v';
   }
   if (kalEngType.toLowerCase() == "oqaluut susaasalik") {
     // HTR
-    return 'verb';
+    return 'v';
   }
   if (kalEngType.toLowerCase() == "proprium/egennavn") {
     // proper noun
-    return 'noun';
+    return 'n';
   }
   return 'unknown';
 }

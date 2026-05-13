@@ -2,207 +2,207 @@
     "entries": [
         {
             "a": "QATE",
-            "t": "Verb -> Noun",
+            "t": "vn",
             "m": "V{-qatə}N"
         },
         {
             "a": "QAR",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{-qaq}V"
         },
         {
             "a": "SSA",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{ssa}V"
         },
         {
             "a": "VIK",
-            "t": "Verb -> Noun",
+            "t": "vn",
             "m": "V{(v)vik}N"
         },
         {
             "a": "SINNAA",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{sinnau}V"
         },
         {
             "a": "NNGIT",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{ŋŋit}V"
         },
         {
             "a": "ARAQ",
-            "t": "Noun -> Noun",
+            "t": "nn",
             "m": "N{-araq}N"
         },
         {
             "a": "IT",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{-it}V"
         },
         {
             "a": "SI",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{si}V"
         },
         {
             "a": "TAR",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{ðaq}V"
         },
         {
             "a": "U",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{-u}V"
         },
         {
             "a": "LLUAR",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{(l)luaq}V"
         },
         {
             "a": "QQU",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{tqu}V"
         },
         {
             "a": "TIP",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{tət}V"
         },
         {
             "a": "TUQ",
-            "t": "Verb -> Noun",
+            "t": "vn",
             "m": "V{ðuq}N"
         },
         {
             "a": "GE",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{-gə}V"
         },
         {
             "a": "SIAQ",
-            "t": "Noun -> Noun",
+            "t": "nn",
             "m": "N{siaq}N"
         },
         {
             "a": "SSAQ",
-            "t": "Noun -> Noun",
+            "t": "nn",
             "m": "N{kcaq}N"
         },
         {
             "a": "SUAQ",
-            "t": "Noun -> Noun",
+            "t": "nn",
             "m": "N{(q)cuaq}N"
         },
         {
             "a": "NNGUR",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{ŋŋuq}V"
         },
         {
             "a": "SINNAANNGUR",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{sinnaaŋŋuq}V"
         },
         {
             "a": "SIMA",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{sima}V"
         },
         {
             "a": "GUMA",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{yuma}V"
         },
         {
             "a": "NIAR",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{niaq}V"
         },
         {
             "a": "LIUR",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{-liuq}V"
         },
         {
             "a": "QE",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{-qə}V"
         },
         {
             "a": "NIQ",
-            "t": "Verb -> Noun",
+            "t": "vn",
             "m": "V{nəq}N"
         },
         {
             "a": "NIQAR",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{nəqaq}V"
         },
         {
             "a": "GALUAR",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{galuaq}V"
         },
         {
             "a": "GI",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{gi}V"
         },
         {
             "a": "QQIP",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{nqik}V"
         },
         {
             "a": "NIRU",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{nəru}V"
         },
         {
             "a": "GUSUP",
-            "t": "Verb -> Verb",
+            "t": "vv",
             "m": "V{(q)gusuk}N"
         },
         {
             "a": "USIQ",
-            "t": "Verb -> Noun",
+            "t": "vn",
             "m": "V{-usiq}N"
         },
         {
             "a": "TAQ",
-            "t": "Verb -> Noun",
+            "t": "vn",
             "m": "V{-ðaq}N"
         },
         {
             "a": "UTE",
-            "t": "Verb -> VERB",
+            "t": "vv",
             "m": "V{-(cc)ut(ə)}V"
         },
         {
             "a": "LIRI",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{-lirə}V"
         },
         {
             "a": "MI",
-            "t": "Clitic",
+            "t": "Enc",
             "m": "*{mi}"
         },
         {
             "a": "MITAAVA",
-            "t": "Clitic",
+            "t": "Enc",
             "m": "*{mitauva}"
         },
         {
             "a": "GUUQ",
-            "t": "Clitic",
+            "t": "Enc",
             "m": "*{guuq}"
         },
         {
             "a": "GIIP",
-            "t": "Noun -> Verb",
+            "t": "nv",
             "m": "N{-giik}V"
         }
     ]
