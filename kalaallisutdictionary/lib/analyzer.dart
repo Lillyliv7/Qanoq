@@ -228,6 +228,9 @@ import 'tagging.dart';
 // illoqarfimmiippoq
 // illu+QAR+Der/nv+Gram/IV+VIK+Der/vn+N+Lok+Sg+Gram/Hyb+IP+Gram/IV+V+Ind+3Sg
 
+// illoqarfianukarsimavoq
+// illu+QAR+Der/nv+Gram/IV+Gram/IV+VIK+Der/vn+N+Trm+Sg+3PlPoss+Gram/Hyb+KAR+Der/nv+Gram/IV+SIMA+Der/vv+V+Ind+3Sg
+
 // qaagit
 // qaa+Gram/IV+V+Imp+2Sg
 
@@ -244,7 +247,12 @@ class Morpheme {
   String type;
   // join: n, iv, tv, nn, nv, vv, vn, enc, ev, end
   // type: enc, aff, end, root
-  Morpheme({required this.join, required this.type, this.form = "", this.endForm = ""});
+  Morpheme({
+    required this.join,
+    required this.type,
+    this.form = "",
+    this.endForm = "",
+  });
 }
 
 class ParsedWord {
@@ -266,9 +274,13 @@ ParsedWord parseWord(String str) {
   final parts = str.split('+');
   List<Morpheme> morphemes = [];
   bool inEnding = false;
+  bool nextIsHyb = false;
 
   for (var i = 0; i < parts.length; i++) {
     final part = parts[i];
+    if (part == 'Gram/Hyb') {
+      nextIsHyb = true;
+    }
     if (part.toUpperCase() == part) {
       // all caps, either an affix or an ending marker
       if (part == 'V' || part == 'N' || part == "Adv" || part == "Conj") {
@@ -277,10 +289,20 @@ ParsedWord parseWord(String str) {
       } else {
         // affix or enclitic
         if (inEnding) {
+          if (nextIsHyb) {
+            inEnding = false;
+            nextIsHyb = false;
+          }
           morphemes.add(Morpheme(join: 'enc', type: 'enc', form: part));
         } else {
           // affix
-          morphemes.add(Morpheme(join: analyzerTypeConverter(parts[i+1]), type: 'aff', form: part));
+          morphemes.add(
+            Morpheme(
+              join: analyzerTypeConverter(parts[i + 1]),
+              type: 'aff',
+              form: part,
+            ),
+          );
         }
       }
     } else if (part.toLowerCase() == part) {
@@ -288,10 +310,17 @@ ParsedWord parseWord(String str) {
       morphemes.add(Morpheme(join: '?', type: 'root', form: part));
     } else {
       // in something that is not an affix, ending marker, or a root
-      if(morphemes[0].join == '?') { // has not found base join marker yet
+      if (morphemes[0].join == '?') {
+        // has not found base join marker yet
         morphemes[0].join = analyzerTypeConverter(part).split('')[0];
       }
     }
+  }
+
+  print('------');
+
+  for (var m in morphemes) {
+    print(m.endForm + ' ' + m.form + ' ' + m.join + ' ' + m.type);
   }
 
   return ParsedWord(morphemes: morphemes);
@@ -374,10 +403,7 @@ class _analyzerPageState extends State<analyzerPage> {
       }
 
       final cleaned =
-          analysesNoRepeats
-              ?.map((a) => parseWord(a))
-              .toList() ??
-          [];
+          analysesNoRepeats?.map((a) => parseWord(a)).toList() ?? [];
       setState(() {
         _cleanedAnalyses = cleaned.cast<ParsedWord>();
       });
