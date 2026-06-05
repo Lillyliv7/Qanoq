@@ -289,7 +289,7 @@ ParsedWord parseWord(String str) {
       if (part == 'V' || part == 'N' || part == "Adv" || part == "Conj") {
         // ending start
         inEnding = true;
-        morphemes.add(Morpheme(join: 'end', type: 'end', form: part));
+        morphemes.add(Morpheme(join: 'end', type: 'end', endForm: part));
       } else {
         // affix or enclitic
         if (nextIsHyb) {
@@ -318,10 +318,12 @@ ParsedWord parseWord(String str) {
         morphemes[0].join = analyzerTypeConverter(part).split('')[0];
       }
       // add ending part (after ending marker)
-      for (var m = morphemes.length - 1; m >= 0; m--) {
-        if (morphemes[m].type == 'end') {
-          morphemes[m].endForm += ' + $part';
-          break;
+      if (morphemes.length > 1) {
+        for (var m = morphemes.length - 1; m >= 0; m--) {
+          if (morphemes[m].type == 'end') {
+            morphemes[m].endForm += ' + $part';
+            break;
+          }
         }
       }
     }
