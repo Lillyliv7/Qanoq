@@ -275,7 +275,6 @@ ParsedWord parseWord(String str) {
   List<Morpheme> morphemes = [];
   bool inEnding = false;
   bool nextIsHyb = false;
-  String currentEnding = '';
 
   for (var i = 0; i < parts.length; i++) {
     final part = parts[i];
@@ -363,6 +362,7 @@ Future<String?> analyzerRequest(String URL, String searchTerm) async {
 }
 
 String analyzerToMofo(String input, String type) {
+  // search affixes/clitics
   for (int i = 0; i < analyzerMofoObj['entries'].length; i++) {
     if (analyzerMofoObj['entries'][i]['t'] == type) {
       if (analyzerMofoObj['entries'][i]['a'] == input) {
@@ -370,6 +370,13 @@ String analyzerToMofo(String input, String type) {
       }
     }
   }
+  // search endings
+  for (int i = 0; i < endings['endings'].length; i++) {
+    if (input == endings['endings'][i]['analyzer']) {
+      return endings['endings'][i]['mofo'];
+    }
+  }
+
 
   return input;
 }

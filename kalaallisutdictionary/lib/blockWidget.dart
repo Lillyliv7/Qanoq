@@ -5,8 +5,8 @@ import 'dictionary.dart';
 import 'variables.dart';
 
 String getBlockText(Morpheme morph) {
-  if (morph.form == "" && morph.endForm != "") {
-    return morph.endForm;
+  if (morph.type == 'end') {
+    return analyzerToMofo(morph.endForm, '');
   }
   return analyzerToMofo(morph.form, morph.join);
 }
@@ -16,6 +16,9 @@ String getTooltipText(Morpheme morph) {
     print(morph.join);
     print(dictionarySearchType(morph.join, morph.form).join('\n'));
     return dictionarySearchType(morph.join, morph.form).join('\n');
+  }
+  if (morph.type == 'end') {
+    return morph.endForm;
   }
   return '?';
 }
