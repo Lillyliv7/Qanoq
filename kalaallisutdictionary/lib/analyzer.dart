@@ -317,10 +317,7 @@ ParsedWord parseWord(String str) {
       morphemes.add(Morpheme(join: '?', type: 'root', form: part));
     } else {
       // in something that is not an affix, ending marker, or a root
-      if (morphemes[0].join == '?') {
-        // has not found base join marker yet
-        morphemes[0].join = analyzerTypeConverter(part).split('')[0];
-      }
+
       // add ending part (after ending marker)
       if (morphemes.length > 1 && inEnding) {
         for (var m = morphemes.length - 1; m >= 0; m--) {
@@ -330,6 +327,15 @@ ParsedWord parseWord(String str) {
           }
         }
       }
+    }
+  }
+
+  // find root type
+  if (morphemes.length > 1) {
+    if (morphemes[1].type == 'aff'){
+      morphemes[0].join = morphemes[1].join.split('')[0];
+    } else if (morphemes[1].type == 'end') {
+      morphemes[0].join = morphemes[1].endForm.split('')[0].toLowerCase();
     }
   }
 

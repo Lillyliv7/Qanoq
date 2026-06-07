@@ -42,7 +42,7 @@ List<String> dictionarySearchType(String type, String term) {
       term.toLowerCase(),
     )) {
       if (kalEngTypeToEng(kalEngObj['entries'][i]['type']) ==
-          type.toLowerCase()) {
+          type.toLowerCase() || type == '?') {
         engOutputs.add(kalEngObj['entries'][i]['eng']);
         lengths.add(kalEngObj['entries'][i]['kal'].length);
         if (lengths[lengths.length - 1] < minLength) {

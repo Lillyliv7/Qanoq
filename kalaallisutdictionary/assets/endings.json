@@ -79,6 +79,11 @@
             "tag": "endings.noun.equ.pl",
             "analyzer": "N + Aeq + Pl",
             "mofo": "N{tut}"
+        },
+        {
+            "tag": "endings.verb.ind.3sg",
+            "analyzer": "V + Ind + 3Sg",
+            "mofo": "N{vuq}"
         }
     ],
     "tables": {
