@@ -13,8 +13,6 @@ String getBlockText(Morpheme morph) {
 
 String getTooltipText(Morpheme morph) {
   if(morph.type == 'root') {
-    print(morph.join);
-    print(dictionarySearchType(morph.join, morph.form).join('\n'));
     return dictionarySearchType(morph.join, morph.form).join('\n');
   }
   if (morph.type == 'end') {
@@ -77,45 +75,6 @@ class _ParsedWordWidgetState extends State<ParsedWordWidget> {
 
   @override
   Widget build(BuildContext context) {
-
-        // return Wrap(
-        //   spacing: 6.0,
-        //   runSpacing: 8.0,
-        //   children: [
-        //     // 1. Root Block
-        //     _MorphBlock(
-        //       text: widget.word.root.text,
-        //       // Now uses the loaded definition
-        //       tooltipText: '${uiStrings['grammar.root']} (${uiStrings['grammar.'+widget.word.root.type.toLowerCase()]})\n${dictionarySearchType(widget.word.root.type, kalEngTypeToEng(widget.word.root.type) == 'verb' ? widget.word.root.text.substring(0,widget.word.root.text.length-1) : widget.word.root.text).join('\n')}',
-        //       backgroundColor: Colors.blue.shade100,
-        //       borderColor: Colors.blue.shade400,
-        //     ),
-            
-        //     // 2. Affix Blocks
-        //     ...widget.word.affixes.map((affix) => _MorphBlock(
-        //       text: analyzerToMofo(affix.text, affix.joinEffect),
-        //       tooltipText: uiStrings[affix.joinEffect] ?? '',
-        //       backgroundColor: Colors.green.shade100,
-        //       borderColor: Colors.green.shade400,
-        //     )),
-
-        //     // 3. Ending Block
-        //     _MorphBlock(
-        //       text: '-${widget.word.ending.tags.isEmpty ? '∅' : widget.word.ending.tags.first}',
-        //       tooltipText: '${uiStrings['grammar.ending']}\n${widget.word.ending.tags.join(" + ")}',
-        //       backgroundColor: Colors.orange.shade100,
-        //       borderColor: Colors.orange.shade400,
-        //     ),
-
-        //     // clitics!!!
-        //     ...widget.word.clitics.map((clitic) => _MorphBlock(
-        //       text: analyzerToMofo(clitic.text, 'Clitic'),
-        //       tooltipText: uiStrings['grammar.clitic'],
-        //       backgroundColor: Colors.purple.shade100,
-        //       borderColor: Colors.purple.shade400,
-        //     )),
-        //   ],
-        // );
         return Wrap(
           spacing: 6.0,
           runSpacing: 8.0,
