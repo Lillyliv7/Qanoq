@@ -227,7 +227,8 @@
         {
             "a": "GIIP",
             "t": "nv",
-            "m": "N{-giik}V"
+            "m": "N{-giik}V",
+            "d": "Actors are mutually N"
         }
     ]
 }
