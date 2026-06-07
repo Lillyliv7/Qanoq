@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'analyzer.dart';
 import 'dictionary.dart';
-import 'variables.dart';
 
 String getBlockText(Morpheme morph) {
   if (morph.type == 'end') {
@@ -21,7 +21,7 @@ Future<String?> getTooltipText(Morpheme morph) async {
     return morph.endForm;
   }
   if (morph.type == 'aff') {
-    final res = await getMofoDefinition(analyzerToMofo(morph.form, morph.join), morph.join);
+    final res = await getMofoDefinition(morph);
     if (res == null) return '?';
     try {
       final data = jsonDecode(res);
@@ -94,10 +94,8 @@ class _ParsedWordWidgetState extends State<ParsedWordWidget> {
                   builder: (context, snapshot) {
                     final tooltip = snapshot.data ?? '';
                     return _MorphBlock(
-                      text: getBlockText(e),
                       tooltipText: tooltip,
-                      backgroundColor: getBlockColor(e),
-                      borderColor: getBorderColor(e),
+                      morpheme: e,
                     );
                   },
                 ))
@@ -107,16 +105,12 @@ class _ParsedWordWidgetState extends State<ParsedWordWidget> {
 }
 
 class _MorphBlock extends StatelessWidget {
-  final String text;
   final String tooltipText;
-  final Color backgroundColor;
-  final Color borderColor;
+  final Morpheme morpheme;
 
   const _MorphBlock({
-    required this.text,
     required this.tooltipText,
-    required this.backgroundColor,
-    required this.borderColor,
+    required this.morpheme,
   });
 
   @override
@@ -129,19 +123,24 @@ class _MorphBlock extends StatelessWidget {
         color: Colors.black87,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(6.0),
-          border: Border.all(color: borderColor, width: 1.5),
-        ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+      child: GestureDetector(
+        onTap: () async {
+          launchUrl(Uri.parse(getMofoLink(morpheme)), mode: LaunchMode.externalApplication);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+          decoration: BoxDecoration(
+            color: getBlockColor(morpheme),
+            borderRadius: BorderRadius.circular(6.0),
+            border: Border.all(color: getBorderColor(morpheme), width: 1.5),
+          ),
+          child: Text(
+            getBlockText(morpheme),
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
           ),
         ),
       ),

@@ -167,23 +167,38 @@ String analyzerToMofo(String input, String type) {
   return input;
 }
 
-String getMofoLink(String affix, String join, String type){//https://mofo.oqa.dk/Morphemes/kl/affix/vv/n%C9%99kuu
+String getMofoLink(Morpheme morph){
   String convertedType = "";
-  if (type == 'aff') {convertedType = 'affix';}
-  else if (type == 'enc') {
-    if (join == 'ev') {
+  if (morph.type == 'aff') {convertedType = 'affix';}
+  else if (morph.type == 'enc') {
+    if (morph.join == 'ev') {
       convertedType = 'declitic';
     } else {
       convertedType = 'enclitic';
     }
   }
-  return 'https://mofo.oqa.dk/Morphemes/kl/$convertedType/$join/${affix.replaceAll(RegExp(r'[A-Z{}\*]'), '')}';
+  if (morph.join == 'ev') {
+    return 'https://mofo.oqa.dk/Morphemes/kl/$convertedType/v/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}';
+  } else if (morph.join == 'enc') {
+    return 'https://mofo.oqa.dk/Morphemes/kl/$convertedType/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}';
+  } else {
+    return 'https://mofo.oqa.dk/Morphemes/kl/$convertedType/${morph.join}/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}';
+  }
 }
 
-Future<String?> getMofoDefinition(String affix, String join) async {
+Future<String?> getMofoDefinition(Morpheme morph) async {
   var url;
+  String convertedType = "";
+  if (morph.type == 'aff') {convertedType = 'affix';}
+  else if (morph.type == 'enc') {
+    if (morph.join == 'ev') {
+      convertedType = 'declitic';
+    } else {
+      convertedType = 'enclitic';
+    }
+  }
   try {
-    url = Uri.https('mofo.oqa.dk', '/api/get/kl/affix/$join/${affix.replaceAll(RegExp(r'[A-Z{}]'), '')}');
+    url = Uri.https('mofo.oqa.dk', '/api/get/kl/$convertedType/${morph.join}/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}');
   } catch (e) {
     print('An error occurred: $e');
   }
