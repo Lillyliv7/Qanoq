@@ -131,7 +131,7 @@ ParsedWord parseWord(String str) {
 }
 
 Future<String?> analyzerRequest(String URL, String searchTerm) async {
-  final url = Uri.http(URL, '/analyze', {'word': searchTerm});
+  final url = Uri.https(URL, '/analyze', {'word': searchTerm});
   print(url);
 
   try {
@@ -183,7 +183,7 @@ String getMofoLink(String affix, String join, String type){//https://mofo.oqa.dk
 Future<String?> getMofoDefinition(String affix, String join) async {
   var url;
   try {
-    url = Uri.http('mofo.oqa.dk', '/api/get/kl/affix/$join/${affix.replaceAll(RegExp(r'[A-Z{}]'), '')}');
+    url = Uri.https('mofo.oqa.dk', '/api/get/kl/affix/$join/${affix.replaceAll(RegExp(r'[A-Z{}]'), '')}');
   } catch (e) {
     print('An error occurred: $e');
   }
@@ -218,7 +218,7 @@ class _analyzerPageState extends State<analyzerPage> {
   final TextEditingController _wordController = TextEditingController();
 
   String _textValue = '';
-  String _analyzerServer = 'imlillith888.xyz:8000';
+  String _analyzerServer = 'imlillith888.xyz';
 
   List<ParsedWord> _cleanedAnalyses = [];
 
