@@ -137,8 +137,6 @@ Future<String?> analyzerRequest(String URL, String searchTerm) async {
   try {
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      print('Request successful!');
-      print('Response body: ${response.body}');
       return response.body;
     } else {
       print('Request failed with status: ${response.statusCode}.');
@@ -169,20 +167,44 @@ String analyzerToMofo(String input, String type) {
   return input;
 }
 
-String getMofoDefinition(String input, String type) {
-  // search affixes/clitics
-  for (int i = 0; i < analyzerMofoObj['entries'].length; i++) {
-    if (analyzerMofoObj['entries'][i]['t'] == type) {
-      if (analyzerMofoObj['entries'][i]['a'] == input) {
-        if (analyzerMofoObj['entries'][i]['d'] != null) {
-          return analyzerMofoObj['entries'][i]['d'];
-        }
-      }
+String getMofoLink(String affix, String join, String type){//https://mofo.oqa.dk/Morphemes/kl/affix/vv/n%C9%99kuu
+  String convertedType = "";
+  if (type == 'aff') {convertedType = 'affix';}
+  else if (type == 'enc') {
+    if (join == 'ev') {
+      convertedType = 'declitic';
+    } else {
+      convertedType = 'enclitic';
     }
   }
-
-  return "";
+  return 'https://mofo.oqa.dk/Morphemes/kl/$convertedType/$join/${affix.replaceAll(RegExp(r'[A-Z{}]'), '')}';
 }
+
+Future<String?> getMofoDefinition(String affix, String join) async {
+  var url;
+  try {
+    url = Uri.http('mofo.oqa.dk', '/api/get/kl/affix/$join/${affix.replaceAll(RegExp(r'[A-Z{}]'), '')}');
+  } catch (e) {
+    print('An error occurred: $e');
+  }
+
+  print(url);
+
+  try {
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      print('Request successful!');
+      print('Response body: ${response.body}');
+      return response.body;
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  } catch (e) {
+    print('An error occurred: $e');
+  }
+  return null;
+}
+
 
 class analyzerPage extends StatefulWidget {
   const analyzerPage({super.key});
@@ -299,9 +321,7 @@ class _analyzerPageState extends State<analyzerPage> {
                             border: OutlineInputBorder(),
                           ),
                           onChanged: (text) {
-                            setState(() {
-                              _textValue = text;
-                            });
+                            _textValue = text;
                           },
                         ),
                       ),

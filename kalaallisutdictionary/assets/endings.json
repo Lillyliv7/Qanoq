@@ -83,32 +83,32 @@
         {
             "tag": "endings.verb.ind.3sg",
             "analyzer": "V + Ind + 3Sg",
-            "mofo": "N{vuq}"
+            "mofo": "V{vuq}"
         },
         {
             "tag": "endings.verb.ind.1sg",
             "analyzer": "V + Ind + 1Sg",
-            "mofo": "N{vuŋa}"
+            "mofo": "V{vuŋa}"
         },
         {
             "tag": "endings.verb.ind.2sg",
             "analyzer": "V + Ind + 2Sg",
-            "mofo": "N{vutit}"
+            "mofo": "V{vutit}"
         },
         {
             "tag": "endings.verb.ind.3pl",
             "analyzer": "V + Ind + 3Pl",
-            "mofo": "N{(p)put}"
+            "mofo": "V{(p)put}"
         },
         {
             "tag": "endings.verb.ind.1pl",
             "analyzer": "V + Ind + 3Pl",
-            "mofo": "N{vugut}"
+            "mofo": "V{vugut}"
         },
         {
             "tag": "endings.verb.ind.2pl",
             "analyzer": "V + Ind + 3Pl",
-            "mofo": "N{vusi}"
+            "mofo": "V{vusi}"
         }
     ],
     "tables": {

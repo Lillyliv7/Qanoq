@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'analyzer.dart';
@@ -11,7 +13,7 @@ String getBlockText(Morpheme morph) {
   return analyzerToMofo(morph.form, morph.join);
 }
 
-String getTooltipText(Morpheme morph) {
+Future<String?> getTooltipText(Morpheme morph) async {
   if(morph.type == 'root') {
     return dictionarySearchType(morph.join, morph.form).join('\n');
   }
@@ -19,7 +21,15 @@ String getTooltipText(Morpheme morph) {
     return morph.endForm;
   }
   if (morph.type == 'aff') {
-    return getMofoDefinition(morph.form, morph.join);
+    final res = await getMofoDefinition(analyzerToMofo(morph.form, morph.join), morph.join);
+    if (res == null) return '?';
+    try {
+      final data = jsonDecode(res);
+      final meanings = (data['meanings'] as List?)?.map((e) => e.toString()).join('\n').replaceAll('`', '');
+      return meanings ?? '?';
+    } catch (e) {
+      return e.toString();
+    }
   }
   return '?';
 }
@@ -79,7 +89,18 @@ class _ParsedWordWidgetState extends State<ParsedWordWidget> {
           spacing: 6.0,
           runSpacing: 8.0,
           children: [
-            ...widget.word.morphemes.map((e) => _MorphBlock(text: getBlockText(e), tooltipText: getTooltipText(e), backgroundColor: getBlockColor(e), borderColor: getBorderColor(e)))
+            ...widget.word.morphemes.map((e) => FutureBuilder<String?>(
+                  future: getTooltipText(e),
+                  builder: (context, snapshot) {
+                    final tooltip = snapshot.data ?? '';
+                    return _MorphBlock(
+                      text: getBlockText(e),
+                      tooltipText: tooltip,
+                      backgroundColor: getBlockColor(e),
+                      borderColor: getBorderColor(e),
+                    );
+                  },
+                ))
           ]
         );
   }
