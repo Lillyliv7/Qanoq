@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'analyzer.dart';
 import 'dictionary.dart';
+import 'mofo.dart';
 
 String getBlockText(Morpheme morph) {
   if (morph.type == 'end') {

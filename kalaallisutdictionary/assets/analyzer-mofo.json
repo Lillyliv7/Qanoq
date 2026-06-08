@@ -196,6 +196,16 @@
             "m": "*{mitauva}"
         },
         {
+            "a": "LU",
+            "t": "enc",
+            "m": "*{lu}"
+        },
+        {
+            "a": "LI",
+            "t": "enc",
+            "m": "*{li}"
+        },
+        {
             "a": "GUUQ",
             "t": "enc",
             "m": "*{guuq}"
@@ -214,6 +224,16 @@
             "a": "NIKUU",
             "t": "vv",
             "m": "V{nəkuu}V"
+        },
+        {
+            "a": "LIR",
+            "t": "vv",
+            "m": "V{-liq}V"
+        },
+        {
+            "a": "VIP",
+            "t": "vv",
+            "m": "V{-vik}V"
         },
         {
             "a": "GIIP",
