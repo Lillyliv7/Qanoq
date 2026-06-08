@@ -80,6 +80,8 @@
             "analyzer": "N + Aeq + Pl",
             "mofo": "N{tut}"
         },
+
+
         {
             "tag": "endings.verb.ind.3sg",
             "analyzer": "V + Ind + 3Sg",
@@ -109,6 +111,177 @@
             "tag": "endings.verb.ind.2pl",
             "analyzer": "V + Ind + 2Pl",
             "mofo": "V{vusi}"
+        },
+
+
+        {
+            "tag": "endings.verb.ind.1sg-2sg",
+            "analyzer": "V + Ind + 1Sg + 2SgO",
+            "mofo": "V{vakkit}"
+        },
+        {
+            "tag": "endings.verb.ind.1sg-3sg",
+            "analyzer": "V + Ind + 1Sg + 3SgO",
+            "mofo": "V{vara}"
+        },
+        {
+            "tag": "endings.verb.ind.2sg-1sg",
+            "analyzer": "V + Ind + 2Sg + 1SgO",
+            "mofo": "V{varma}"
+        },
+        {
+            "tag": "endings.verb.ind.2sg-3sg",
+            "analyzer": "V + Ind + 2Sg + 3SgO",
+            "mofo": "V{vat}"
+        },
+        {
+            "tag": "endings.verb.ind.3sg-1sg",
+            "analyzer": "V + Ind + 3Sg + 1SgO",
+            "mofo": "V{vaaŋa}"
+        },
+        {
+            "tag": "endings.verb.ind.3sg-2sg",
+            "analyzer": "V + Ind + 3Sg + 2SgO",
+            "mofo": "V{vaatit}"
+        },
+        {
+            "tag": "endings.verb.ind.3sg-3sg",
+            "analyzer": "V + Ind + 3Sg + 3SgO",
+            "mofo": "V{vaa}"
+        },
+
+
+        {
+            "tag": "endings.verb.ind.1sg-2pl",
+            "analyzer": "V + Ind + 1Sg + 2PlO",
+            "mofo": "V{vassi}"
+        },
+        {
+            "tag": "endings.verb.ind.1sg-3pl",
+            "analyzer": "V + Ind + 1Sg + 3PlO",
+            "mofo": "V{vakka}"
+        },
+        {
+            "tag": "endings.verb.ind.2sg-1pl",
+            "analyzer": "V + Ind + 2Sg + 1PlO",
+            "mofo": "V{vatsigut}"
+        },
+        {
+            "tag": "endings.verb.ind.2sg-3pl",
+            "analyzer": "V + Ind + 2Sg + 3PlO",
+            "mofo": "V{vatit}"
+        },
+        {
+            "tag": "endings.verb.ind.3sg-1pl",
+            "analyzer": "V + Ind + 3Sg + 1PlO",
+            "mofo": "V{vaatigut}"
+        },
+        {
+            "tag": "endings.verb.ind.3sg-2pl",
+            "analyzer": "V + Ind + 3Sg + 2PlO",
+            "mofo": "V{vaasi}"
+        },
+        {
+            "tag": "endings.verb.ind.3sg-3pl",
+            "analyzer": "V + Ind + 3Sg + 3PlO",
+            "mofo": "V{vai}"
+        },
+
+
+
+        {
+            "tag": "endings.verb.ind.1pl-2sg",
+            "analyzer": "V + Ind + 1Pl + 2SgO",
+            "mofo": "V{vatsigit}"
+        },
+        {
+            "tag": "endings.verb.ind.1pl-3sg",
+            "analyzer": "V + Ind + 1Pl + 3SgO",
+            "mofo": "V{varput}"
+        },
+        {
+            "tag": "endings.verb.ind.2pl-1sg",
+            "analyzer": "V + Ind + 2Pl + 1SgO",
+            "mofo": "V{vassinga}"
+        },
+        {
+            "tag": "endings.verb.ind.2pl-3sg",
+            "analyzer": "V + Ind + 2Pl + 3SgO",
+            "mofo": "V{varsi}"
+        },
+        {
+            "tag": "endings.verb.ind.3pl-1sg",
+            "analyzer": "V + Ind + 3Pl + 1SgO",
+            "mofo": "V{vaaŋŋa}"
+        },
+        {
+            "tag": "endings.verb.ind.3pl-2sg",
+            "analyzer": "V + Ind + 3Pl + 2SgO",
+            "mofo": "V{vaatsit}"
+        },
+        {
+            "tag": "endings.verb.ind.3pl-3sg",
+            "analyzer": "V + Ind + 3Pl + 3SgO",
+            "mofo": "V{vaat}"
+        },
+
+
+        {
+            "tag": "endings.verb.ind.1pl-2pl",
+            "analyzer": "V + Ind + 1Pl + 2PlO",
+            "mofo": "V{vassi}"
+        },
+        {
+            "tag": "endings.verb.ind.1pl-3pl",
+            "analyzer": "V + Ind + 1Pl + 3PlO",
+            "mofo": "V{vavut}"
+        },
+        {
+            "tag": "endings.verb.ind.2pl-1pl",
+            "analyzer": "V + Ind + 2Pl + 1PlO",
+            "mofo": "V{vatsigut}"
+        },
+        {
+            "tag": "endings.verb.ind.2pl-3pl",
+            "analyzer": "V + Ind + 2Pl + 3PlO",
+            "mofo": "V{vasi}"
+        },
+        {
+            "tag": "endings.verb.ind.3pl-1pl",
+            "analyzer": "V + Ind + 3Pl + 1PlO",
+            "mofo": "V{vaatigut}"
+        },
+        {
+            "tag": "endings.verb.ind.3pl-2pl",
+            "analyzer": "V + Ind + 3Pl + 2PlO",
+            "mofo": "V{vaasi}"
+        },
+        {
+            "tag": "endings.verb.ind.3pl-3pl",
+            "analyzer": "V + Ind + 3Pl + 3PlO",
+            "mofo": "V{vaat}"
+        },
+
+
+        {
+            "tag": "endings.verb.int.2sg",
+            "analyzer": "V + Int + 2Sg",
+            "mofo": "V{vit}"
+        },
+        {
+            "tag": "endings.verb.int.3sg",
+            "analyzer": "V + Int + 3Sg",
+            "mofo": "V{va}"
+        },
+        {
+            "tag": "endings.verb.int.2pl",
+            "analyzer": "V + Int + 2Pl",
+            "mofo": "V{visi}"
+        },
+        {
+            "tag": "endings.verb.int.3pl",
+            "analyzer": "V + Int + 3Pl",
+            "mofo": "V{(p)pat}"
         }
     ],
     "tables": {
