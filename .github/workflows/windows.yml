@@ -3,17 +3,16 @@ name: Build & Release Windows Desktop
 on:
   push:
     tags:
-      - 'v*' # Triggers when you push a version tag like v1.0.0
+      - 'v*'
 
 jobs:
   release:
     name: Build and Release Windows Zip
     runs-on: windows-latest
 
-    # Tell GitHub to run all commands inside your subfolder
     defaults:
       run:
-        working-directory: kalaallisutdictionary # <--- Change this to your folder name
+        working-directory: kalaallisutdictionary
 
     permissions:
       contents: write
@@ -31,26 +30,22 @@ jobs:
       - name: Fetch Project Dependencies
         run: flutter pub get
 
-      # Optional: Uncomment if your project relies on code generation
-      # - name: Run Build Runner
-      #   run: flutter pub run build_runner build --delete-conflicting-outputs
-
       - name: Build Windows Binary
         run: flutter build windows --release
 
       - name: Package Bundle Directory
         shell: pwsh
         run: |
-          # Navigate into the Windows release bundle folder
-          cd build\windows\x64\release\bundle
+          # CHANGED: Navigates to the correct native Windows output path
+          cd build\windows\x64\runner\Release
           
-          # Compress the entire contents into a .zip archive at the repository root
+          # Compress the executable, dlls, and data folder into the root workspace
           Compress-Archive -Path * -DestinationPath "$env:GITHUB_WORKSPACE\windows-x64.zip"
 
       - name: Publish to GitHub Releases
         uses: softprops/action-gh-release@v2
         with:
-          files: flutter-app-windows.zip
+          files: windows-x64.zip
           name: Release ${{ github.ref_name }}
           tag_name: ${{ github.ref }}
           draft: false
