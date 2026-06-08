@@ -81,7 +81,7 @@ class _settingsPageState extends State<settingsPage> {
             ],
           ),
           const SizedBox(height: 50),
-          Text(uiStrings['settings.credits'], style: TextStyle(fontSize: 15)),
+          SelectableText(uiStrings['settings.credits'], style: TextStyle(fontSize: 15)),
         ],
       ),
     );

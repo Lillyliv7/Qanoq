@@ -42,7 +42,7 @@ jobs:
       - name: Package Bundle Directory
         run: |
           cd build/linux/x64/release/bundle
-          tar -czf $GITHUB_WORKSPACE/flutter-app-linux.tar.gz *
+          tar -czf $GITHUB_WORKSPACE/linux-x64.tar.gz *
 
       # 3. UPLOAD FROM THE REPO ROOT
       - name: Publish to GitHub Releases
