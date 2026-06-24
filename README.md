@@ -6,6 +6,7 @@ This is an app designed to help learners of the Greenlandic (Kalaallisut) langua
 The Releases tab has up to date releases for Windows and Linux, and the site can be accessed on web at https://imlillith888.xyz
 
 To build desktop from scratch (Linux):
+
 Install flutter (https://docs.flutter.dev/install)
 ```
 git clone https://github.com/Lillyliv7/Kalaallisut-Dictionary
