@@ -6,8 +6,8 @@ ENV PATH="/opt/flutter/bin:${PATH}"
 RUN flutter config --enable-web
 
 WORKDIR /build
-COPY kalaallisutdictionary/ ./kalaallisutdictionary/
-WORKDIR /build/kalaallisutdictionary
+COPY Qanoq/ ./Qanoq/
+WORKDIR /build/Qanoq
 RUN flutter build web --release
 
 # Stage 2: Python Runtime
@@ -15,6 +15,6 @@ FROM python:3.11-slim
 WORKDIR /app
 RUN pip install --no-cache-dir fastapi uvicorn hfst
 COPY . .
-COPY --from=flutter-builder /build/kalaallisutdictionary/build/web ./static
+COPY --from=flutter-builder /build/Qanoq/build/web ./static
 
 CMD ["python", "analyzer/api.py"]
