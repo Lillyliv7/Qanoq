@@ -167,7 +167,6 @@ class _analyzerPageState extends State<analyzerPage>
   @override
   bool get wantKeepAlive => true;
 
-  final TextEditingController _serverController = TextEditingController();
   final TextEditingController _wordController = TextEditingController();
 
   String _textValue = '';
@@ -237,7 +236,6 @@ class _analyzerPageState extends State<analyzerPage>
 
   @override
   void dispose() {
-    _serverController.dispose();
     _wordController.dispose();
     super.dispose();
   }
@@ -258,7 +256,7 @@ class _analyzerPageState extends State<analyzerPage>
                   return StatefulBuilder(
                     builder: (context, setState) {
                       return AlertDialog(
-                        title: Text(uiStrings['dictionary.settings']),
+                        title: Text(uiStrings['tagging.title']),
                         content: taggingPage(),
                       );
                     },

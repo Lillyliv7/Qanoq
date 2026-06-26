@@ -41,8 +41,9 @@ class taggingPage extends StatefulWidget {
 }
 
 class _taggingPageState extends State<taggingPage> with AutomaticKeepAliveClientMixin<taggingPage> {
-  final TextEditingController _serverController = TextEditingController();
-  final TextEditingController _wordController = TextEditingController();
+  final TextEditingController _inputArea = TextEditingController();
+  final TextEditingController _outputArea = TextEditingController();
+  final TextEditingController _customAnalysesArea = TextEditingController();
 
   String _textValue = '';
 
@@ -89,8 +90,9 @@ class _taggingPageState extends State<taggingPage> with AutomaticKeepAliveClient
 
   @override
   void dispose() {
-    _serverController.dispose();
-    _wordController.dispose();
+    _inputArea.dispose();
+    _outputArea.dispose();
+    _customAnalysesArea.dispose();
     super.dispose();
   }
 
@@ -113,134 +115,35 @@ class _taggingPageState extends State<taggingPage> with AutomaticKeepAliveClient
         ),
         const SizedBox(height: 15),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 800),
+          constraints: const BoxConstraints(maxWidth: 1000, minWidth: 800),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          file = (await pickFile())!;
-                          print(file);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          // fixedSize: const Size(50, 50),
-                          padding: EdgeInsets.all(8),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: Text(
-                          uiStrings['tagging.file'],
-                          style: TextStyle(fontSize: 15),
-                        ),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 400),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: _inputArea,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 5,
+                      maxLines: 1000,
+                      decoration: InputDecoration(
+                        labelText: uiStrings['tagging.input-label'],
                       ),
-                      const SizedBox(width: 15),
-                      ElevatedButton(
-                        onPressed: () {
-                          saveFile(file);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          // fixedSize: const Size(50, 50),
-                          padding: EdgeInsets.all(8),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: Text(
-                          uiStrings['tagging.save'],
-                          style: TextStyle(fontSize: 15),
-                        ),
+                    ),
+                    const SizedBox(height: 15),
+                    TextField(
+                      controller: _outputArea,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 5,
+                      maxLines: 1000,
+                      decoration: InputDecoration(
+                        labelText: uiStrings['tagging.output-label'],
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(width: 15),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 400),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(50, 50),
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: const Icon(Icons.arrow_left_sharp, size: 48),
-                        ),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: TextField(
-                            controller: _wordController,
-                            decoration: InputDecoration(
-                              hintText: uiStrings['analyzer.enter-word'],
-                              border: OutlineInputBorder(),
-                            ),
-                            onChanged: (text) {
-                              setState(() {
-                                _textValue = text;
-                              });
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 15),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(50, 50),
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: const Icon(Icons.arrow_right_sharp, size: 48),
-                        ),
-                        const SizedBox(width: 15),
-                        ElevatedButton(
-                          onPressed: _searchDictionary,
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(50, 50),
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: const Icon(Icons.pageview_outlined, size: 32),
-                        ),
-                      ],
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // Render the custom widget for each analysis
-                      children: _cleanedAnalyses
-                          .map(
-                            (parsedWord) => Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8.0,
-                              ),
-                              child: ParsedWordWidget(word: parsedWord),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
