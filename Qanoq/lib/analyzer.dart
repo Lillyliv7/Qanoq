@@ -162,7 +162,10 @@ class analyzerPage extends StatefulWidget {
   State<analyzerPage> createState() => _analyzerPageState();
 }
 
-class _analyzerPageState extends State<analyzerPage> {
+class _analyzerPageState extends State<analyzerPage> with AutomaticKeepAliveClientMixin<analyzerPage>{
+  @override
+  bool get wantKeepAlive => true;
+  
   final TextEditingController _serverController = TextEditingController();
   final TextEditingController _wordController = TextEditingController();
 

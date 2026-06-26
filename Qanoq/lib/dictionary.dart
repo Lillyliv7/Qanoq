@@ -80,7 +80,7 @@ class dictionaryPage extends StatefulWidget {
   State<dictionaryPage> createState() => _dictionaryPageState();
 }
 
-class _dictionaryPageState extends State<dictionaryPage> {
+class _dictionaryPageState extends State<dictionaryPage> with AutomaticKeepAliveClientMixin<dictionaryPage>{
   final _scrollController = ScrollController();
 
   final TextEditingController _wordController = TextEditingController();
@@ -464,4 +464,7 @@ class _dictionaryPageState extends State<dictionaryPage> {
       ],
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

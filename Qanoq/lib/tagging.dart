@@ -40,7 +40,7 @@ class taggingPage extends StatefulWidget {
   State<taggingPage> createState() => _taggingPageState();
 }
 
-class _taggingPageState extends State<taggingPage> {
+class _taggingPageState extends State<taggingPage> with AutomaticKeepAliveClientMixin<taggingPage> {
   final TextEditingController _serverController = TextEditingController();
   final TextEditingController _wordController = TextEditingController();
 
@@ -248,4 +248,7 @@ class _taggingPageState extends State<taggingPage> {
       ],
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

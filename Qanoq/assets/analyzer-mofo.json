@@ -51,6 +51,36 @@
             "m": "V{ðaq}V"
         },
         {
+            "a": "JAAR",
+            "t": "vv",
+            "m": "V{-jaaq}V"
+        },
+        {
+            "a": "PALLAP",
+            "t": "vv",
+            "m": "V{(q)vallak}V"
+        },
+        {
+            "a": "LAAR",
+            "t": "vv",
+            "m": "V{-laaq}V"
+        },
+        {
+            "a": "NGAJAP",
+            "t": "vv",
+            "m": "V{-ŋajak}V"
+        },
+        {
+            "a": "NIR",
+            "t": "vv",
+            "m": "V{niq}V"
+        },
+        {
+            "a": "LIK",
+            "t": "nn",
+            "m": "N{-lək}N"
+        },
+        {
             "a": "U",
             "t": "nv",
             "m": "N{-u}V"
@@ -94,6 +124,16 @@
             "a": "SUAQ",
             "t": "nn",
             "m": "N{(q)cuaq}N"
+        },
+        {
+            "a": "NNGUAQ",
+            "t": "nn",
+            "m": "N{ŋŋuaq}N"
+        },
+        {
+            "a": "NNGUAR",
+            "t": "vv",
+            "m": "V{ŋŋuaq}V"
         },
         {
             "a": "NNGUR",
@@ -189,6 +229,11 @@
             "a": "MI",
             "t": "enc",
             "m": "*{mi}"
+        },
+        {
+            "a": "AASIIT",
+            "t": "enc",
+            "m": "*{aasiit}"
         },
         {
             "a": "MITAAVA",

@@ -7,9 +7,12 @@ class tablePage extends StatefulWidget {
   State<tablePage> createState() => _tablePageState();
 }
 
-class _tablePageState extends State<tablePage> {
+class _tablePageState extends State<tablePage> with AutomaticKeepAliveClientMixin<tablePage> {
   @override
   Widget build(BuildContext context) {
     return Column();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
