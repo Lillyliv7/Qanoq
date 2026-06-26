@@ -138,7 +138,7 @@ Future<String?> analyzerRequest(String searchTerm) async {
       '${Uri.base.origin}/analyze',
     ).replace(queryParameters: {'word': searchTerm});
   } else {
-    url = Uri.https('imlillith888.xyz', '/analyze', {'word': searchTerm});
+    url = Uri.https('qanoq.gl', '/analyze', {'word': searchTerm});
   }
   print(url);
 
@@ -162,16 +162,40 @@ class analyzerPage extends StatefulWidget {
   State<analyzerPage> createState() => _analyzerPageState();
 }
 
-class _analyzerPageState extends State<analyzerPage> with AutomaticKeepAliveClientMixin<analyzerPage>{
+class _analyzerPageState extends State<analyzerPage>
+    with AutomaticKeepAliveClientMixin<analyzerPage> {
   @override
   bool get wantKeepAlive => true;
-  
+
   final TextEditingController _serverController = TextEditingController();
   final TextEditingController _wordController = TextEditingController();
 
   String _textValue = '';
 
   List<ParsedWord> _cleanedAnalyses = [];
+
+  void serverErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Server Error'),
+          content: Text(
+            'Check if your internet connection is stable, if so, try updating the app.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Dismiss'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   void _searchDictionary() {
     setState(() {
@@ -182,6 +206,7 @@ class _analyzerPageState extends State<analyzerPage> with AutomaticKeepAliveClie
         setState(() {
           _cleanedAnalyses = [];
         });
+        serverErrorDialog(context);
         return;
       }
       final analyzedObj = jsonDecode(analyzed);
@@ -293,19 +318,32 @@ class _analyzerPageState extends State<analyzerPage> with AutomaticKeepAliveClie
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                // Render the custom widget for each analysis
-                children: _cleanedAnalyses
-                    .map(
-                      (parsedWord) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: ParsedWordWidget(word: parsedWord),
-                      ),
-                    )
-                    .toList(),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _cleanedAnalyses.isEmpty
+                        ? [
+                            const Text(
+                              'No analyses',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ]
+                        : _cleanedAnalyses
+                              .map(
+                                (parsedWord) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0,
+                                  ),
+                                  child: ParsedWordWidget(word: parsedWord),
+                                ),
+                              )
+                              .toList(),
+                  ),
+                ),
               ),
             ),
           ],

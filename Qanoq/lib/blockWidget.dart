@@ -83,7 +83,6 @@ class _ParsedWordWidgetState extends State<ParsedWordWidget> {
   @override
   void initState() {
     super.initState();
-    print(widget.word.morphemes[0].type);
   }
 
   @override
