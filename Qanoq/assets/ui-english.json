@@ -3,7 +3,10 @@
     "ui.ok": "OK",
     "ui.on": "On",
     "ui.off": "Off",
+    "ui.server-error": "Server Error",
+    "ui.server-error-text": "Check if your internet connection is stable, if so, try updating the app.",
     "analyzer.enter-word": "Enter a full word",
+    "analyzer.no-analyses": "No analyses",
     "analyzer.title": "Word Lookup",
     "tables.noun.title": "Nouns",
     "tables.noun.singular": "Singular",
@@ -33,5 +36,5 @@
     "settings.language": "Language",
     "settings.title": "Settings",
     "settings.dark-mode": "Dark mode",
-    "settings.credits": "Developed by Lillith (lillith888 on Discord)\nFree Software under the GNU GPL Version 3.0\nhttps://www.gnu.org/licenses/gpl-3.0.en.html\nhttps://github.com/Lillyliv7/Kalaallisut-Dictionary"
+    "settings.credits": "Developed by Lillith (lillith888 on Discord)\nFree Software under the GNU GPL Version 3.0\nhttps://www.gnu.org/licenses/gpl-3.0.en.html\nhttps://github.com/Lillyliv7/Qanoq"
 }

@@ -180,13 +180,13 @@ class _analyzerPageState extends State<analyzerPage>
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Server Error'),
+          title: Text(uiStrings['ui.server-error']),
           content: Text(
-            'Check if your internet connection is stable, if so, try updating the app.',
+            uiStrings['ui.server-error-text'],
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Dismiss'),
+              child: Text(uiStrings['ui.close']),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -327,8 +327,8 @@ class _analyzerPageState extends State<analyzerPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: _cleanedAnalyses.isEmpty
                         ? [
-                            const Text(
-                              'No analyses',
+                            Text(
+                              uiStrings['analyzer.no-analyses'],
                               style: TextStyle(color: Colors.grey),
                             ),
                           ]

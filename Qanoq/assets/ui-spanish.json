@@ -3,7 +3,10 @@
     "ui.ok": "OK",
     "ui.on": "Activado",
     "ui.off": "Desactivado",
+    "ui.server-error": "Error del Servidor",
+    "ui.server-error-text": "Comprueba si tu conexión a internet es estable o intenta actualizar el aplicación.",
     "analyzer.enter-word": "Introduzca una palabra completa",
+    "analyzer.no-analyses": "Sin análisis",
     "analyzer.title": "Búsqueda de Palabras",
     "tables.noun.title": "Sustantivos",
     "tables.noun.singular": "Singular",
@@ -33,5 +36,5 @@
     "settings.language": "Idioma",
     "settings.title": "Ajustes",
     "settings.dark-mode": "Modo oscuro",
-    "settings.credits": "Desarrollado por Lillith (lillith888 en Discord)\nTraducido al español por mi\nSoftware Libre bajo el GNU GPL Versión 3.0\nhttps://www.gnu.org/licenses/gpl-3.0.en.html\nhttps://github.com/Lillyliv7/Kalaallisut-Dictionary"
+    "settings.credits": "Desarrollado por Lillith (lillith888 en Discord)\nTraducido al español por mi\nSoftware Libre bajo el GNU GPL Versión 3.0\nhttps://www.gnu.org/licenses/gpl-3.0.en.html\nhttps://github.com/Lillyliv7/Qanoq"
 }
