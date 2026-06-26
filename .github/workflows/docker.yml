@@ -1,0 +1,53 @@
+name: Build and Release Docker Image
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on any tag starting with 'v', e.g., v1.0.0
+
+permissions:
+  contents: write    # Required to upload assets to GitHub Releases
+  packages: write    # Required to push images to GitHub Container Registry
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Docker requires repository names to be strictly lowercase
+      - name: Format repository name
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # We use load: true so the image is available locally for the 'docker save' step
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true 
+          tags: ghcr.io/${{ env.REPO }}:${{ github.ref_name }},ghcr.io/${{ env.REPO }}:latest
+
+      - name: Push to GitHub Container Registry
+        run: |
+          docker push ghcr.io/${{ env.REPO }}:${{ github.ref_name }}
+          docker push ghcr.io/${{ env.REPO }}:latest
+
+      - name: Export Docker image to tarball
+        run: docker save ghcr.io/${{ env.REPO }}:${{ github.ref_name }} | gzip > analyzer-${{ github.ref_name }}.tar.gz
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: analyzer-${{ github.ref_name }}.tar.gz
+          generate_release_notes: true
