@@ -44,10 +44,10 @@ jobs:
           docker push ghcr.io/${{ env.REPO }}:latest
 
       - name: Export Docker image to tarball
-        run: docker save ghcr.io/${{ env.REPO }}:${{ github.ref_name }} | gzip > analyzer-${{ github.ref_name }}.tar.gz
+        run: docker save ghcr.io/${{ env.REPO }}:${{ github.ref_name }} | gzip > docker-${{ github.ref_name }}.tar.gz
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: analyzer-${{ github.ref_name }}.tar.gz
+          files: docker-${{ github.ref_name }}.tar.gz
           generate_release_notes: true

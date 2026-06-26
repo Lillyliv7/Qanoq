@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:kalaallisutdictionary/tagging.dart';
-import 'package:kalaallisutdictionary/conjugationTables.dart';
+import 'tagging.dart';
+import 'conjugationTables.dart';
 import 'dart:convert';
 
 import 'analyzer.dart';

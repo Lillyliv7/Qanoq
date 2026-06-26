@@ -1,4 +1,4 @@
-package com.example.kalaallisutdictionary
+package gl.qanoq
 
 import io.flutter.embedding.android.FlutterActivity
 
