@@ -45,10 +45,7 @@ class _taggingPageState extends State<taggingPage>
     with AutomaticKeepAliveClientMixin<taggingPage> {
   final TextEditingController _inputArea = TextEditingController();
   final TextEditingController _outputArea = TextEditingController();
-  final TextEditingController _customAnalysesArea = TextEditingController();
   final TextEditingController _wordController = TextEditingController();
-
-  String _textValue = '';
 
   String file = '';
 
@@ -106,7 +103,6 @@ class _taggingPageState extends State<taggingPage>
   void dispose() {
     _inputArea.dispose();
     _outputArea.dispose();
-    _customAnalysesArea.dispose();
     _wordController.dispose();
     super.dispose();
   }
@@ -201,9 +197,6 @@ class _taggingPageState extends State<taggingPage>
                                     hintText: uiStrings['analyzer.enter-word'],
                                     border: const OutlineInputBorder(),
                                   ),
-                                  onChanged: (text) {
-                                    _textValue = text;
-                                  },
                                 ),
                               ),
                               const SizedBox(width: 15),

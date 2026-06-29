@@ -189,8 +189,6 @@ class _analyzerPageState extends State<analyzerPage>
 
   final TextEditingController _wordController = TextEditingController();
 
-  String _textValue = '';
-
   List<ParsedWord> _cleanedAnalyses = [];
 
   void serverErrorDialog(BuildContext context) {
@@ -218,7 +216,7 @@ class _analyzerPageState extends State<analyzerPage>
     setState(() {
       _cleanedAnalyses = [];
     });
-    analyzerRequest(_textValue).then((analyzed) {
+    analyzerRequest(_wordController.text).then((analyzed) {
       if (analyzed == null) {
         setState(() {
           _cleanedAnalyses = [];
@@ -312,9 +310,6 @@ class _analyzerPageState extends State<analyzerPage>
                             hintText: uiStrings['analyzer.enter-word'],
                             border: OutlineInputBorder(),
                           ),
-                          onChanged: (text) {
-                            _textValue = text;
-                          },
                         ),
                       ),
                       const SizedBox(width: 15),
