@@ -1,4 +1,3 @@
-
 import 'package:http/http.dart' as http;
 
 import 'analyzer.dart';
@@ -20,14 +19,36 @@ String analyzerToMofo(String input, String type) {
     }
   }
 
-
   return input;
 }
 
-String getMofoLink(Morpheme morph){
+String getMofoPath(Morpheme morph) {
   String convertedType = "";
-  if (morph.type == 'aff') {convertedType = 'affix';}
-  else if (morph.type == 'enc') {
+  if (morph.type == 'aff') {
+    convertedType = 'affix';
+  } else if (morph.type == 'enc') {
+    if (morph.join == 'ev') {
+      convertedType = 'declitic';
+    } else {
+      convertedType = 'enclitic';
+    }
+  }
+  if (morph.join == 'ev') {
+    return 'kl/$convertedType/v/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}';
+  } else if (morph.join == 'enc') {
+    return 'kl/$convertedType/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}';
+  } else if (morph.type == 'aff') {
+    return 'kl/$convertedType/${morph.join}/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}';
+  } else {
+    return morph.toString();
+  }
+}
+
+String getMofoLink(Morpheme morph) {
+  String convertedType = "";
+  if (morph.type == 'aff') {
+    convertedType = 'affix';
+  } else if (morph.type == 'enc') {
     if (morph.join == 'ev') {
       convertedType = 'declitic';
     } else {
@@ -46,8 +67,9 @@ String getMofoLink(Morpheme morph){
 Future<String?> getMofoDefinition(Morpheme morph) async {
   var url;
   String convertedType = "";
-  if (morph.type == 'aff') {convertedType = 'affix';}
-  else if (morph.type == 'enc') {
+  if (morph.type == 'aff') {
+    convertedType = 'affix';
+  } else if (morph.type == 'enc') {
     if (morph.join == 'ev') {
       convertedType = 'declitic';
     } else {
@@ -55,7 +77,10 @@ Future<String?> getMofoDefinition(Morpheme morph) async {
     }
   }
   try {
-    url = Uri.https('mofo.oqa.dk', '/api/get/kl/$convertedType/${morph.join}/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}');
+    url = Uri.https(
+      'mofo.oqa.dk',
+      '/api/get/kl/$convertedType/${morph.join}/${analyzerToMofo(morph.form, morph.join).replaceAll(RegExp(r'[A-Z{}\*]'), '')}',
+    );
   } catch (e) {
     print('An error occurred: $e');
   }

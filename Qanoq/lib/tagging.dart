@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 
+import 'mofo.dart';
 import 'variables.dart';
 import 'analyzer.dart';
 import 'blockWidget.dart';
@@ -51,14 +52,25 @@ class _taggingPageState extends State<taggingPage>
 
   String file = '';
 
-  // Changed from List<String> to List<ParsedWord>
   List<ParsedWord> _cleanedAnalyses = [];
+
+  var currentPosition = 0;
+  List<String> inputList = [];
+
+  void _addNextWord() {
+    if (currentPosition < inputList.length) {
+      setState(() {
+        _wordController.text = inputList[currentPosition];
+      });
+      currentPosition++;
+    }
+  }
 
   void _searchDictionary() {
     setState(() {
       _cleanedAnalyses = [];
     });
-    analyzerRequest(_textValue).then((analyzed) {
+    analyzerRequest(_wordController.text).then((analyzed) {
       if (analyzed == null) {
         setState(() {
           _cleanedAnalyses = [];
@@ -101,11 +113,9 @@ class _taggingPageState extends State<taggingPage>
 
   @override
   Widget build(BuildContext context) {
-    // Call super.build when using AutomaticKeepAliveClientMixin
     super.build(context);
 
     return SingleChildScrollView(
-      // Added to handle overall overflow if content is taller than screen
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -145,6 +155,13 @@ class _taggingPageState extends State<taggingPage>
                           const Text("Input"),
                           TextField(
                             controller: _inputArea,
+                            onChanged: (value) {
+                              setState(() {
+                                currentPosition = 0;
+                                inputList = value.split(' ');
+                                _addNextWord();
+                              });
+                            },
                             keyboardType: TextInputType.multiline,
                             minLines: 5,
                             maxLines: 10000,
@@ -206,6 +223,61 @@ class _taggingPageState extends State<taggingPage>
                               ),
                             ],
                           ),
+                          const SizedBox(height: 15),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () => {},
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: const Size(50, 50),
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Load',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () => {},
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: const Size(50, 50),
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Save',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () => {_addNextWord()},
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: const Size(50, 50),
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Skip Word',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
                             child: Column(
@@ -228,7 +300,8 @@ class _taggingPageState extends State<taggingPage>
                                             child: Row(
                                               children: [
                                                 IconButton(
-                                                  tooltip: 'Add to output',
+                                                  tooltip:
+                                                      uiStrings['tagging.add-to-output'],
                                                   padding: EdgeInsets.zero,
                                                   constraints:
                                                       const BoxConstraints(
@@ -242,6 +315,15 @@ class _taggingPageState extends State<taggingPage>
                                                           _outputArea.text;
                                                       _outputArea.text =
                                                           '$current$parsedWord ';
+
+                                                      _addNextWord();
+                                                      // for (var morph
+                                                      //     in parsedWord
+                                                      //         .morphemes) {
+                                                      //   print(
+                                                      //     getMofoPath(morph),
+                                                      //   );
+                                                      // }
                                                     });
                                                   },
                                                 ),

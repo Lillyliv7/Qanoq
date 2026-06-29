@@ -274,7 +274,7 @@ class _analyzerPageState extends State<analyzerPage>
                   return StatefulBuilder(
                     builder: (context, setState) {
                       return AlertDialog(
-                        title: Text(uiStrings['tagging.title']),
+                        // title: Text(uiStrings['tagging.title']),
                         content: taggingPage(),
                       );
                     },
