@@ -12,12 +12,12 @@
         },
         {
             "tag": "endings.noun.abs.sg",
-            "analyzer": "N + Abs + Sg",
+            "analyzer": "N + Rel + Sg",
             "mofo": "N{Ø}"
         },
         {
             "tag": "endings.noun.abs.pl",
-            "analyzer": "N + Abs + Pl",
+            "analyzer": "N + Rel + Pl",
             "mofo": "N{(i)t}"
         },
         {
@@ -80,6 +80,188 @@
             "analyzer": "N + Aeq + Pl",
             "mofo": "N{tut}"
         },
+
+
+        {
+            "tag": "endings.noun.abs.1sg-sg",
+            "analyzer": "N + Abs + Sg + 1SgPoss",
+            "mofo": "N{ga}"
+        },
+        {
+            "tag": "endings.noun.abs.1sg-pl",
+            "analyzer": "N + Abs + Pl + 1SgPoss",
+            "mofo": "N{kka}"
+        },
+        {
+            "tag": "endings.noun.abs.2sg-sg",
+            "analyzer": "N + Abs + Sg + 2SgPoss",
+            "mofo": "N{(-i)t}"
+        },
+        {
+            "tag": "endings.noun.abs.2sg-pl",
+            "analyzer": "N + Abs + Pl + 2SgPoss",
+            "mofo": "N{-tit}"
+        },
+        {
+            "tag": "endings.noun.abs.3sg-sg",
+            "analyzer": "N + Abs + Sg + 3SgPoss",
+            "mofo": "N{-a}"
+        },
+        {
+            "tag": "endings.noun.abs.3sg-pl",
+            "analyzer": "N + Abs + Pl + 3SgPoss",
+            "mofo": "N{-i}"
+        },
+        {
+            "tag": "endings.noun.abs.4sg-sg",
+            "analyzer": "N + Abs + Sg + 4SgPoss",
+            "mofo": "N{ni}"
+        },
+        {
+            "tag": "endings.noun.abs.4sg-pl",
+            "analyzer": "N + Abs + Pl + 4SgPoss",
+            "mofo": "N{-ni}"
+        },
+
+
+
+
+        {
+            "tag": "endings.noun.abs.1pl-sg",
+            "analyzer": "N + Abs + Sg + 1PlPoss",
+            "mofo": "N{(r)put}"
+        },
+        {
+            "tag": "endings.noun.abs.1pl-pl",
+            "analyzer": "N + Abs + Pl + 1PlPoss",
+            "mofo": "N{-vut}"
+        },
+        {
+            "tag": "endings.noun.abs.2pl-sg",
+            "analyzer": "N + Abs + Sg + 2PlPoss",
+            "mofo": "N{(r)si}"
+        },
+        {
+            "tag": "endings.noun.abs.2pl-pl",
+            "analyzer": "N + Abs + Pl + 2PlPoss",
+            "mofo": "N{-si}"
+        },
+        {
+            "tag": "endings.noun.abs.3pl-sg",
+            "analyzer": "N + Abs + Sg + 3PlPoss",
+            "mofo": "N{-at}"
+        },
+        {
+            "tag": "endings.noun.abs.3pl-pl",
+            "analyzer": "N + Abs + Pl + 3PlPoss",
+            "mofo": "N{-at}"
+        },
+        {
+            "tag": "endings.noun.abs.3pl-pl",
+            "analyzer": "N + Abs + Pl + 3PlPoss",
+            "mofo": "N{-i}"
+        },
+        {
+            "tag": "endings.noun.abs.4pl-sg",
+            "analyzer": "N + Abs + Sg + 4PlPoss",
+            "mofo": "N{(r)tik}"
+        },
+        {
+            "tag": "endings.noun.abs.4pl-pl",
+            "analyzer": "N + Abs + Pl + 4PlPoss",
+            "mofo": "N{-tik}"
+        },
+
+
+
+
+        {
+            "tag": "endings.noun.erg.1sg-sg",
+            "analyzer": "N + Rel + Sg + 1SgPoss",
+            "mofo": "N{ma}"
+        },
+        {
+            "tag": "endings.noun.erg.1sg-pl",
+            "analyzer": "N + Rel + Pl + 1SgPoss",
+            "mofo": "N{-ma}"
+        },
+        {
+            "tag": "endings.noun.erg.2sg-sg",
+            "analyzer": "N + Rel + Sg + 2SgPoss",
+            "mofo": "N{(r)vit}"
+        },
+        {
+            "tag": "endings.noun.erg.2sg-pl",
+            "analyzer": "N + Rel + Pl + 2SgPoss",
+            "mofo": "N{-vit}"
+        },
+        {
+            "tag": "endings.noun.erg.3sg-sg",
+            "analyzer": "N + Rel + Sg + 3SgPoss",
+            "mofo": "N{-ata}"
+        },
+        {
+            "tag": "endings.noun.erg.3sg-pl",
+            "analyzer": "N + Rel + Pl + 3SgPoss",
+            "mofo": "N{-isa}"
+        },
+        {
+            "tag": "endings.noun.erg.4sg-sg",
+            "analyzer": "N + Rel + Sg + 4SgPoss",
+            "mofo": "N{mi}"
+        },
+        {
+            "tag": "endings.noun.erg.4sg-pl",
+            "analyzer": "N + Rel + Pl + 4SgPoss",
+            "mofo": "N{-mi}"
+        },
+
+
+
+
+        {
+            "tag": "endings.noun.erg.1pl-sg",
+            "analyzer": "N + Rel + Sg + 1PlPoss",
+            "mofo": "N{tta}"
+        },
+        {
+            "tag": "endings.noun.erg.1pl-pl",
+            "analyzer": "N + Rel + Pl + 1PlPoss",
+            "mofo": "N{-tta}"
+        },
+        {
+            "tag": "endings.noun.erg.2pl-sg",
+            "analyzer": "N + Rel + Sg + 2PlPoss",
+            "mofo": "N{ssi}"
+        },
+        {
+            "tag": "endings.noun.erg.2pl-pl",
+            "analyzer": "N + Rel + Pl + 2PlPoss",
+            "mofo": "N{-ssi}"
+        },
+        {
+            "tag": "endings.noun.erg.3pl-sg",
+            "analyzer": "N + Rel + Sg + 3PlPoss",
+            "mofo": "N{-ata}"
+        },
+        {
+            "tag": "endings.noun.erg.3pl-pl",
+            "analyzer": "N + Rel + Pl + 3PlPoss",
+            "mofo": "N{-isa}"
+        },
+        {
+            "tag": "endings.noun.erg.4pl-sg",
+            "analyzer": "N + Rel + Sg + 4PlPoss",
+            "mofo": "N{mik}"
+        },
+        {
+            "tag": "endings.noun.erg.4pl-pl",
+            "analyzer": "N + Rel + Pl + 4PlPoss",
+            "mofo": "N{-mik}"
+        },
+
+
+
 
 
         {
